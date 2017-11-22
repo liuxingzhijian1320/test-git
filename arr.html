@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>文字上下滚动轮播</title>
+</head>
+
+<body>
+  <script>
+var arr = [
+      {position:1,name:'11',num:21,id:1,spec:'wrwer1',service_type:0},
+      {position:1,name:'16',num:126,id:6,spec:'wrwer6',service_type:0},
+      {position:2,name:'17',num:127,id:7,spec:'wrwer7',service_type:0},
+
+      {position:2,name:'12',num:122,id:2,spec:'wrwer2',service_type:1},
+      {position:3,name:'18',num:128,id:8,spec:'wrwer8',service_type:1},
+      {position:4,name:'18',num:129,id:9,spec:'wrwer9',service_type:1},
+      {position:5,name:'15',num:125,id:5,spec:'wrwer5',service_type:1},
+      {position:5,name:'10',num:120,id:10,spec:'wrwer10',service_type:1},
+
+
+      {position:1,name:'1',num:112,id:11,spec:'wrwer11',service_type:2},
+      {position:2,name:'2',num:122,id:12,spec:'wrwer12',service_type:2},
+      {position:3,name:'3',num:132,id:13,spec:'wrwe13r1',service_type:2},
+
+      {position:3,name:'13',num:123,id:3,spec:'wrwer3',service_type:3},
+      {position:4,name:'4',num:142,id:14,spec:'wrwer31',service_type:3},
+      {position:4,name:'5',num:152,id:15,spec:'wrwer456',service_type:3},
+
+
+      {position:1,name:'6',num:162,id:16,spec:'wrwer867',service_type:4},
+      {position:1,name:'7',num:172,id:17,spec:'wrwer798',service_type:4},
+      {position:4,name:'14',num:124,id:4,spec:'wrwer4',service_type:4},]
+
+    function initData(arr,c_key) {
+      let map = {}
+      arr.forEach((item, index) => {
+        const key = item[c_key];
+        if (!map[key]) {
+          map[key] = {
+            [c_key]: key,
+            items: []
+          }
+        }
+
+        map[key].items.push(item)
+      })
+      var old_arr = []
+      for (let key in map){
+        old_arr.push(map[key])
+      }
+
+      return old_arr
+
+    }
+
+    // console.info(11,initData(arr,'service_type'))
+  var newarr = initData(arr,'service_type').map(n=>{
+      return {
+        ...n,
+        items:initData(n.items,'position')
+      }
+    })
+
+console.info(newarr)
+
+
+    function resetArray(arr){
+      let setArr = [];
+      arr.forEach(n=>{
+        // console.info('n',n)
+        n.items.forEach(i=>{
+          console.info('i',i)
+            i.items.forEach(j=>{
+              // console.info('j',j)
+              setArr.push(j)
+            })
+          })
+        })
+      return setArr
+      }
+      
+  
+
+
+    console.info('resetArray',resetArray(newarr))
+
+
+
+
+  </script>
+</body>
+
+</html>
